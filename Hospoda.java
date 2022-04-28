@@ -74,20 +74,23 @@ public class Hospoda {
     }
       
      //This method prints importatnt info about Hospoda
-      public static void closePub(Hospoda h,  Drink d1, Drink d2){       
-       System.out.println("\nBalance of pub: " + h.balanceOfHospoda + "$.");
+      public static void closePub(Hospoda h,  Drink d1, Drink d2){
+       System.out.println("\nMETODA closePub");
+       System.out.println("Balance of pub: " + h.balanceOfHospoda + "$.");
        System.out.println(d1.nameOfDrink + " : " + d1.amountOfDrink);
        System.out.println(d2.nameOfDrink + " : " + d2.amountOfDrink);
       }
       
      //This method prints important info about Customer  
       public static void closeCustomerAcc(Customer c){
-      System.out.println(c.nameOfCustomer + "´s balance : " + c.balanceOfCustomer + "$.");
+        System.out.println("\nMETODA closeCustomerAcc");
+        System.out.println(c.nameOfCustomer + "´s balance : " + c.balanceOfCustomer + "$.");
       
       }
     
       // Prints out Arraylists storing info about transaction
       public static void printArraylists(){
+      System.out.println("\nMETODA printArraylists ");
       System.out.println("There were those customers: " + customerNamesList);
       System.out.println("We sold those drinks: " + soldCocktailNamesList);
       System.out.println("We charged customers those amounts of money: " + soldCocktailPricesList);
@@ -97,6 +100,7 @@ public class Hospoda {
     public static ArrayList<Integer> searchCustomer (Customer o, ArrayList<String> a){
         
         ArrayList<Integer> tempA = new ArrayList<>();
+        System.out.println("\nMETODA searchCustomer");
 
         if(a.indexOf(o.nameOfCustomer) != -1){
 
@@ -121,7 +125,8 @@ public class Hospoda {
         return tempA;
     }
     
-    // method searching for indexes in a where is Customer o located in ArrayList a -> RETURN ArrayList<Integer>
+    // method searching for indexes in a where is Drink located in ArrayList a -> RETURN ArrayList<Integer>
+    // It seems to be useless now. method countDrinks works better.
     public static ArrayList<Integer> searchDrink (Drink o, ArrayList<String> a){
         
         ArrayList<Integer> tempA = new ArrayList<>();
@@ -145,7 +150,7 @@ public class Hospoda {
         return tempA;
     }
     
-    // Printing out names stored ArrayList nameList.
+    // Printing out names stored in ArrayList nameList.
     public static ArrayList<String> printNames(ArrayList<Integer> a){
         ArrayList<String> tempB = new ArrayList<>();
         
@@ -153,26 +158,92 @@ public class Hospoda {
             System.out.println("Printing out all ocurance : ");
             for(int i = 0; i < a.size(); i++){
                 System.out.print(customerNamesList.get(a.get(i)) + " ");
+                System.out.println("i = " + i);
                 
         }
         System.out.println(" \n");
         }
         else{
-            System.out.println("There are none names");}
+            System.out.println("There are no drinks!");}
         return tempB;
     }
     
-    //Method counting sold drinks and amount of money earned
-    public static void countDrinks(Drink d){
-        
+    //Method printing out sold drinks in ArrayList soldCocktailNamesList
+    public static ArrayList<String> countDrinks(ArrayList<Integer> a){
+        ArrayList<String> tempC = new ArrayList<>();
+        System.out.println("METODA countDrinks ");
+        System.out.println("indexList<> :" + indexList);
+        if(a.size() > 0){
+            System.out.println("Printing out all ocurance : ");
+            for(int i = 0; i < a.size(); i++){
+                // Here you will change it to store it as ArrayList
+                tempC.add(soldCocktailNamesList.get(a.get(i)));
+                //System.out.print(soldCocktailNamesList.get(a.get(i)) + " ");
+                //System.out.println("i = " + i);
+                
+        }
+        }
+        else{
+            System.out.println("There are none names");}
+        System.out.println(tempC);
+        return tempC;
     }
     
+    //Method printing out  sold drinks in ArrayList soldCocktailPricesList
+    public static ArrayList<Double> countPrices(ArrayList<Integer> a){
+        ArrayList<Double> tempD = new ArrayList<>();
+        System.out.println("\nMETODA countPrices ");
+        System.out.println("indexList<> :" + indexList);
+        if(a.size() > 0){
+            //System.out.println("Printing out all ocurance : ");
+            System.out.println("It´s broken somewhere HERE.");
+            for(int i = 0; i < a.size(); i++){
+                // Here you will change it to store it as ArrayList
+                tempD.add(soldCocktailPricesList.get(a.get(i)));
+                //System.out.print(soldCocktailNamesList.get(a.get(i)) + " ");
+                //System.out.println("i = " + i);               
+        }
+        }
+        else{
+            System.out.println("There are none prices");}
+        
+        System.out.println(tempD);
+        return tempD;
+    }
+    
+    //Method counting total bill - NEFUNGUJE
+    public static double totalBill(Customer c, ArrayList<Integer> a){
+        double total = 0.0;
+        //double predchoziSoucet = 0.0;
+        double nasledujiciCislo;
+        
+        if(a.size() > 0){
+            System.out.println("Printing out all ocurance : ");
+            for(int i = 0; i < a.size(); i++){
+                // Here you will change it to store it as ArrayList
+                nasledujiciCislo = soldCocktailPricesList.get(a.get(i));
+                total = total + nasledujiciCislo;
+                //tempD.add(soldCocktailPricesList.get(a.get(i)));
+                //System.out.print(soldCocktailNamesList.get(a.get(i)) + " ");
+                //System.out.println("i = " + i);
+                
+        }
+        }
+    return total;
+    }
+    
+    //Method puting it together - NEFUNGUJE
+    public static void printReciept(Customer c, ArrayList<Integer> a, ArrayList<String> b){
+        System.out.println("\nMETODA printReciept");
+        searchCustomer(c, customerNamesList);
+        printNames(indexList);
+        countDrinks(indexList);
+        countPrices(indexList);
+    }
+
       // MAIN METHOD
     public static void main(String[] args) {
-    //Creating arrayList of sold products.
-    //ArrayList<String> ucet = new ArrayList<>();
-    //ucet.add("dan");
-    //System.out.println("Array list on index 0 is: " + ucet);
+
     //Creating Objects
         Hospoda kobyla = new Hospoda("Kobyla", 10000.0);
         //System.out.println(kobyla.nameOfHospoda + " was created.");       
@@ -186,7 +257,7 @@ public class Hospoda {
         //System.out.println(water.nameOfDrink + " was created.");
         
     // loop for testing
-       for(int i =1; i<3; i++){
+       for(int i =0; i<10; i++){
             kobyla.sell(dan, beer);
             kobyla.sell(evelina, beer);
             kobyla.sell(evelina, water);
@@ -199,12 +270,18 @@ public class Hospoda {
        
        closeCustomerAcc(dan);
        closeCustomerAcc(evelina);
-       
-      
+       ///
+      /*
       searchCustomer(dan, customerNamesList);
-      System.out.println(indexList);
       printNames(indexList);
-      searchDrink(beer, soldCocktailNamesList);
+      //searchDrink(beer, soldCocktailNamesList);
+      countDrinks(indexList);
+      countPrices(indexList);*/
+      
+      printReciept(dan, indexList, customerNamesList);
+      totalBill(dan, indexList);
+      System.out.println(totalBill(dan, indexList));
+
     }
 
 }
