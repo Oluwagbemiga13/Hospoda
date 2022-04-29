@@ -155,10 +155,10 @@ public class Hospoda {
         ArrayList<String> tempB = new ArrayList<>();
         
         if(a.size() > 0){
-            System.out.println("Printing out all ocurance : ");
+            //System.out.println("Printing out all ocurance : ");
             for(int i = 0; i < a.size(); i++){
-                System.out.print(customerNamesList.get(a.get(i)) + " ");
-                System.out.println("i = " + i);
+                //System.out.print(customerNamesList.get(a.get(i)) + " ");
+                //System.out.println("i = " + i);
                 
         }
         System.out.println(" \n");
@@ -174,7 +174,7 @@ public class Hospoda {
         System.out.println("METODA countDrinks ");
         System.out.println("indexList<> :" + indexList);
         if(a.size() > 0){
-            System.out.println("Printing out all ocurance : ");
+            //System.out.println("Printing out all ocurance : ");
             for(int i = 0; i < a.size(); i++){
                 // Here you will change it to store it as ArrayList
                 tempC.add(soldCocktailNamesList.get(a.get(i)));
@@ -211,14 +211,14 @@ public class Hospoda {
         return tempD;
     }
     
-    //Method counting total bill - NEFUNGUJE
+    //Method counting total bill 
     public static double totalBill(Customer c, ArrayList<Integer> a){
         double total = 0.0;
         //double predchoziSoucet = 0.0;
         double nasledujiciCislo;
         
         if(a.size() > 0){
-            System.out.println("Printing out all ocurance : ");
+            //System.out.println("Printing out all ocurance : ");
             for(int i = 0; i < a.size(); i++){
                 // Here you will change it to store it as ArrayList
                 nasledujiciCislo = soldCocktailPricesList.get(a.get(i));
@@ -230,6 +230,21 @@ public class Hospoda {
         }
         }
     return total;
+    }
+    
+    //Method printing everything out as reciept - NEFUNGUJE
+    public static void printBill(Customer c, ArrayList<Integer> a){
+        System.out.println("\nMETODA printBill");
+        if(indexList.size()!=-1){
+            System.out.println("\n" + c.nameOfCustomer + "´s bill.");
+            for (int i = 0; i < indexList.size(); i++){
+                System.out.println(soldCocktailNamesList.get(a.get(i)) + " " + soldCocktailPricesList.get(a.get(i)) + "$");
+            }
+            System.out.println("Your total is " + totalBill(c, a));
+        }
+        else {
+            System.out.println("There is nothing on your bill!");
+        }
     }
     
     //Method puting it together - NEFUNGUJE
@@ -257,7 +272,7 @@ public class Hospoda {
         //System.out.println(water.nameOfDrink + " was created.");
         
     // loop for testing
-       for(int i =0; i<10; i++){
+       for(int i =0; i<3; i++){
             kobyla.sell(dan, beer);
             kobyla.sell(evelina, beer);
             kobyla.sell(evelina, water);
@@ -281,6 +296,8 @@ public class Hospoda {
       printReciept(dan, indexList, customerNamesList);
       totalBill(dan, indexList);
       System.out.println(totalBill(dan, indexList));
+      printBill(dan,indexList);
+      
 
     }
 
