@@ -7,7 +7,11 @@ package hospoda;
 import java.util.ArrayList;
 
 /**
- *
+ * This program imitates pub. It creates customers and drinks. 
+ * It sells drinks to customer and count balances of pub and customers. 
+ * It also  keeps track of drinks avalible
+ * It is able to keep track of orders and prints bill.
+ * It needs to be redone so you will have more objects like "reciept, ledger, walet ect. -> First you need to learn inheritance and polymorphism.
  * @author Daniel
  */
 public class Hospoda {
@@ -121,7 +125,7 @@ public class Hospoda {
         for (int i = 0 ; i <= tempA.size() -1 ;i++){
             indexList.add(tempA.get(i)) ;
         }
-        System.out.println("Size of tempA for " + o.nameOfCustomer + " is : " + tempA.size());
+        //System.out.println("Size of tempA for " + o.nameOfCustomer + " is : " + tempA.size());
         return tempA;
     }
     
@@ -171,8 +175,8 @@ public class Hospoda {
     //Method printing out sold drinks in ArrayList soldCocktailNamesList
     public static ArrayList<String> countDrinks(ArrayList<Integer> a){
         ArrayList<String> tempC = new ArrayList<>();
-        System.out.println("METODA countDrinks ");
-        System.out.println("indexList<> :" + indexList);
+        //System.out.println("METODA countDrinks ");
+        //System.out.println("indexList<> :" + indexList);
         if(a.size() > 0){
             //System.out.println("Printing out all ocurance : ");
             for(int i = 0; i < a.size(); i++){
@@ -185,7 +189,7 @@ public class Hospoda {
         }
         else{
             System.out.println("There are none names");}
-        System.out.println(tempC);
+        //System.out.println(tempC);
         return tempC;
     }
     
@@ -193,10 +197,10 @@ public class Hospoda {
     public static ArrayList<Double> countPrices(ArrayList<Integer> a){
         ArrayList<Double> tempD = new ArrayList<>();
         System.out.println("\nMETODA countPrices ");
-        System.out.println("indexList<> :" + indexList);
+        //System.out.println("indexList<> :" + indexList);
         if(a.size() > 0){
             //System.out.println("Printing out all ocurance : ");
-            System.out.println("It´s broken somewhere HERE.");
+            //System.out.println("It´s broken somewhere HERE.");
             for(int i = 0; i < a.size(); i++){
                 // Here you will change it to store it as ArrayList
                 tempD.add(soldCocktailPricesList.get(a.get(i)));
@@ -207,7 +211,7 @@ public class Hospoda {
         else{
             System.out.println("There are none prices");}
         
-        System.out.println(tempD);
+        //System.out.println(tempD);
         return tempD;
     }
     
@@ -232,7 +236,7 @@ public class Hospoda {
     return total;
     }
     
-    //Method printing everything out as reciept - NEFUNGUJE
+    //Method printing everything out as reciept 
     public static void printBill(Customer c, ArrayList<Integer> a){
         System.out.println("\nMETODA printBill");
         if(indexList.size()!=-1){
@@ -245,6 +249,8 @@ public class Hospoda {
         else {
             System.out.println("There is nothing on your bill!");
         }
+        closeCustomerAcc(c);
+        a.clear();
     }
     
     //Method puting it together - NEFUNGUJE
@@ -265,10 +271,14 @@ public class Hospoda {
         Customer dan = new Customer("Daniel", 27, 100.0);
         //System.out.println(dan.nameOfCustomer + " was created.");        
         Customer evelina = new Customer("Evelína", 1, 300.0);
-        //System.out.println(evelina.nameOfCustomer + " was created.");        
+        //System.out.println(evelina.nameOfCustomer + " was created.");
+        Customer valerie = new Customer("Valerie", 0, 500.0);
+        //System.out.println(evelina.nameOfCustomer + " was created.");         
         Drink beer = new Drink("Pivo", true, 10, 10.0);
         //System.out.println(beer.nameOfDrink + " was created.");      
         Drink water = new Drink("Voda", false, 5, 5.0);
+        //System.out.println(water.nameOfDrink + " was created.");
+        Drink milk = new Drink("Mlíčko", false, 5, 5.0);
         //System.out.println(water.nameOfDrink + " was created.");
         
     // loop for testing
@@ -298,7 +308,16 @@ public class Hospoda {
       System.out.println(totalBill(dan, indexList));
       printBill(dan,indexList);
       
-
+      
+      printReciept(evelina, indexList, customerNamesList);
+      printBill(evelina,indexList);
+      
+      for(int i = 1; i < 5; i++){
+        kobyla.sell(valerie, milk);
+      }
+      printReciept(valerie, indexList, customerNamesList);
+      printBill(valerie,indexList);
+      
     }
 
 }
